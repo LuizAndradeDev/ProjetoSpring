@@ -1,8 +1,9 @@
 package br.com.luizsa.ScreenS.Principal;
 
+import br.com.luizsa.ScreenS.model.DadosEpisodio;
 import br.com.luizsa.ScreenS.model.DadosSerie;
 import br.com.luizsa.ScreenS.model.DadosTemporada;
-import br.com.luizsa.ScreenS.service.ConsumoAPI;
+import br.com.luizsa.ScreenS.service.ConsumoApi;
 import br.com.luizsa.ScreenS.service.ConverteDados;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class Principal {
     private Scanner scanner = new Scanner(System.in);
     private final String ENDERECO = "https://www.omdbapi.com/?t=";
     private final String API_KEY = "&apikey=6585022c";
-    private ConsumoAPI consumo = new ConsumoAPI();
+    private ConsumoApi consumo = new ConsumoApi();
 
     public void exibeMenu() {
         System.out.println("Digite o nome da serie para busca");
@@ -33,6 +34,15 @@ public class Principal {
             temporadas.add(dadosTemporada);
         }
         temporadas.forEach(System.out::println);
+
+//        for(int i = 0; i < dados.totalTemporadas(); i++){
+//            List<DadosEpisodio> episodiosTemporada = temporadas.get(i).episodios();
+//            for(int j = 0; j< episodiosTemporada.size(); j++){
+//                System.out.println(episodiosTemporada.get(j).titulo());
+//            }
+//        }
+
+        temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
 
     }
 }
