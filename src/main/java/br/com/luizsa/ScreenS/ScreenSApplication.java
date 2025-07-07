@@ -13,7 +13,11 @@ public class ScreenSApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception{
-		System.out.printf("Teste");
+		var consumo = new ConsumoAPI();
+		var json = consumo.obterDados("https://www.omdbapi.com/?t=gilmore+girls&apikey=6585022c");
+		var json2 = consumo.obterDados("https://coffee.alexflipnote.dev/random.json");
+		System.out.println(json2);
+		System.out.println(json);
 	}
 
 }
