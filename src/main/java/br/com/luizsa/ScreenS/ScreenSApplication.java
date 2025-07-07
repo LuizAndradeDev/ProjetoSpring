@@ -2,11 +2,15 @@ package br.com.luizsa.ScreenS;
 
 import br.com.luizsa.ScreenS.model.DadosEpisodio;
 import br.com.luizsa.ScreenS.model.DadosSerie;
+import br.com.luizsa.ScreenS.model.DadosTemporada;
 import br.com.luizsa.ScreenS.service.ConsumoAPI;
 import br.com.luizsa.ScreenS.service.ConverteDados;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class ScreenSApplication implements CommandLineRunner {
@@ -32,6 +36,15 @@ public class ScreenSApplication implements CommandLineRunner {
         System.out.println(dados);
 
         System.out.println(dadosEpisodio);
+
+        List<DadosTemporada> temporadas = new ArrayList<>();
+
+        for (int i = 1; i<dados.totalTemporadas(); i++){
+            json = consumo.obterDados("https://www.omdbapi.com/?t=gilmore+girls&season=" + i + "&apikey=6585022c");
+            DadosTemporada dadosTemporada = conversor.obterDados(json, DadosTemporada.class);
+            temporadas.add(dadosTemporada);
+        }
+        temporadas.forEach(System.out::println);
 
     }
 
