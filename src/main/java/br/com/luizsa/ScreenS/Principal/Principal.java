@@ -33,6 +33,7 @@ public class Principal {
             temporadas.add(dadosTemporada);
         }
         temporadas.forEach(System.out::println);
+        System.out.println("oi");
 
 
         //""https://www.omdbapi.com/?t=gilmore+girls&season=" + i + "&apikey=6585022c"gilmore+girls&season=" + i + "&apikey=6585022c"
