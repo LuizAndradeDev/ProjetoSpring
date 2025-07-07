@@ -1,5 +1,6 @@
 package br.com.luizsa.ScreenS;
 
+import br.com.luizsa.ScreenS.model.DadosEpisodio;
 import br.com.luizsa.ScreenS.model.DadosSerie;
 import br.com.luizsa.ScreenS.service.ConsumoAPI;
 import br.com.luizsa.ScreenS.service.ConverteDados;
@@ -24,7 +25,13 @@ public class ScreenSApplication implements CommandLineRunner {
 
 		ConverteDados conversor = new ConverteDados();
 		DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
+
+		var jsonEpisodio = consumo.obterDados("https://www.omdbapi.com/?t=gilmore+girls&season=1&episode=2&apikey=6585022c");
+		DadosEpisodio  dadosEpisodio = conversor.obterDados(json, DadosEpisodio.class);
+
 		System.out.println(dados);
+
+		System.out.println(dadosEpisodio);
 
 	}
 
