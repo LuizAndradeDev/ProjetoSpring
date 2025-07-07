@@ -1,4 +1,4 @@
-package br.com.luizsa.ScreenS.Service;
+package br.com.luizsa.ScreenS.service;
 
 import java.io.IOException;
 import java.net.URI;
