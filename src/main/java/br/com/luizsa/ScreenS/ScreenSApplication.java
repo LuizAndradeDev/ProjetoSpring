@@ -1,6 +1,8 @@
 package br.com.luizsa.ScreenS;
 
+import br.com.luizsa.ScreenS.model.DadosSerie;
 import br.com.luizsa.ScreenS.service.ConsumoAPI;
+import br.com.luizsa.ScreenS.service.ConverteDados;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,9 +18,14 @@ public class ScreenSApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception{
 		var consumo = new ConsumoAPI();
 		var json = consumo.obterDados("https://www.omdbapi.com/?t=gilmore+girls&apikey=6585022c");
-		var json2 = consumo.obterDados("https://coffee.alexflipnote.dev/random.json");
-		System.out.println(json2);
+//		var json2 = consumo.obterDados("https://coffee.alexflipnote.dev/random.json");
+//		System.out.println(json2);
 		System.out.println(json);
+
+		ConverteDados conversor = new ConverteDados();
+		DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
+		System.out.println(dados);
+
 	}
 
 }
