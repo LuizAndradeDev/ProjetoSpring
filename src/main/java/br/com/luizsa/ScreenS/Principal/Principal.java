@@ -94,7 +94,12 @@ public class Principal {
 //                .map(e -> e.titulo().toUpperCase())
 //                .peek(e -> System.out.println("Mapeamento " + e))
 //                .forEach(System.out::println);
-
+        
+        System.out.println("Digite um trecho do titulo do episodio");
+        var techoTitulo = scanner.nextLine();
+        episodios.stream()
+                .filter(e -> e.getTitulo().contains(techoTitulo))
+                .findFirst();
 
     }
 }
