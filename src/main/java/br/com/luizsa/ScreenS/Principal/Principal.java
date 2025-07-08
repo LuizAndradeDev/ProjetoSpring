@@ -7,6 +7,8 @@ import br.com.luizsa.ScreenS.model.Episodio;
 import br.com.luizsa.ScreenS.service.ConsumoApi;
 import br.com.luizsa.ScreenS.service.ConverteDados;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -35,7 +37,7 @@ public class Principal {
         }
         temporadas.forEach(System.out::println);
 
-   temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
+        temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
 
 //        List<String> nomes = Arrays.asList("João", "Paulo", "Guilherme", "Zé");
 //
@@ -63,6 +65,35 @@ public class Principal {
                 ).collect(Collectors.toUnmodifiableList());
 
         episodios.forEach(System.out::println);
+
+        System.out.println("A partir de que ano você deseja ver os pedisodios?");
+
+        var ano = scanner.nextInt();
+
+        LocalDate dataBusca = LocalDate.of(ano, 1, 1);
+
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        episodios.stream()
+                .filter(e -> e.getDataLancamento() != null && e.getDataLancamento().isAfter(dataBusca))
+                .forEach(e -> System.out.println(
+                        "Temporada: " + e.getTemporada() +
+                                " Episodio: " + e.getTitulo() +
+                                " Data de Lançamento " + e.getDataLancamento().format(formatador)
+
+                ));
+//
+//        System.out.println("\nTop 10 episódios");
+//        dadosEpisodios.stream()
+//                .filter(e -> !e.avaliacao().equalsIgnoreCase("N/A"))
+//                .peek(e -> System.out.println("Primeiro filtro(N/A) " + e))
+//                .sorted(Comparator.comparing(DadosEpisodio::avaliacao).reversed())
+//                .peek(e -> System.out.println("Ordenação " + e))
+//                .limit(10)
+//                .peek(e -> System.out.println("Limite " + e))
+//                .map(e -> e.titulo().toUpperCase())
+//                .peek(e -> System.out.println("Mapeamento " + e))
+//                .forEach(System.out::println);
 
 
     }
