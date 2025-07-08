@@ -66,22 +66,22 @@ public class Principal {
 
         episodios.forEach(System.out::println);
 
-        System.out.println("A partir de que ano você deseja ver os pedisodios?");
-
-        var ano = scanner.nextInt();
-
-        LocalDate dataBusca = LocalDate.of(ano, 1, 1);
-
-        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-        episodios.stream()
-                .filter(e -> e.getDataLancamento() != null && e.getDataLancamento().isAfter(dataBusca))
-                .forEach(e -> System.out.println(
-                        "Temporada: " + e.getTemporada() +
-                                " Episodio: " + e.getTitulo() +
-                                " Data de Lançamento " + e.getDataLancamento().format(formatador)
-
-                ));
+//        System.out.println("A partir de que ano você deseja ver os pedisodios?");
+//
+//        var ano = scanner.nextInt();
+//
+//        LocalDate dataBusca = LocalDate.of(ano, 1, 1);
+//
+//        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//
+//        episodios.stream()
+//                .filter(e -> e.getDataLancamento() != null && e.getDataLancamento().isAfter(dataBusca))
+//                .forEach(e -> System.out.println(
+//                        "Temporada: " + e.getTemporada() +
+//                                " Episodio: " + e.getTitulo() +
+//                                " Data de Lançamento " + e.getDataLancamento().format(formatador)
+//
+//                ));
 //
 //        System.out.println("\nTop 10 episódios");
 //        dadosEpisodios.stream()
@@ -94,12 +94,19 @@ public class Principal {
 //                .map(e -> e.titulo().toUpperCase())
 //                .peek(e -> System.out.println("Mapeamento " + e))
 //                .forEach(System.out::println);
-        
+
         System.out.println("Digite um trecho do titulo do episodio");
-        var techoTitulo = scanner.nextLine();
-        episodios.stream()
-                .filter(e -> e.getTitulo().contains(techoTitulo))
+        String trechoTitulo = scanner.nextLine();
+        Optional<Episodio> episodioBuscado = episodios.stream()
+                .filter(e -> e.getTitulo().toUpperCase().contains(trechoTitulo.toUpperCase()))
                 .findFirst();
+
+        if(episodioBuscado.isPresent()){
+            System.out.println("Episodio encontrado" +
+                    "\n Temporada: " + episodioBuscado.get().getTemporada());
+        }else{
+            System.out.println("Episodio não encontrado");
+        }
 
     }
 }
